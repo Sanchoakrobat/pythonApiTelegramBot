@@ -1,5 +1,4 @@
 import json
-import sys
 import time
 import telebot
 import requests
@@ -10,6 +9,7 @@ bot = telebot.TeleBot('6630173318:AAERN7J8yhGM1XfDSyORXKnbNSAG6qEhH9c')
 
 @bot.message_handler(commands=['start'])
 def start(message):
+    '''Запускает общение, открывает кнопки'''
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
     # создаем кнопки под строкой ввода сообщения
     btn1 = types.KeyboardButton("Показать случайную карту")
@@ -26,6 +26,7 @@ def start(message):
 
 @bot.message_handler(content_types=['text'])
 def func(message):
+    '''создает колоду карт на deckofcardsapi.com, берет оттуда карту, скидывает картинку в чат '''
     if (message.text == "Показать случайную карту"):
         deck = requests.get('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1')
         # запрос на создание колоды
